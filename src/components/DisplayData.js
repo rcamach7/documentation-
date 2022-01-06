@@ -4,10 +4,9 @@ export default class DisplayData extends React.Component {
   render() {
     return (
       <div className="DisplayData">
-        <p>data</p>
-        <p>data</p>
-        <p>data</p>
-        <p>data</p>
+        {this.props.notes.map((note) => {
+          console.log(note.toString());
+        })}
       </div>
     );
   }
