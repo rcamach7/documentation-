@@ -2,11 +2,11 @@
 
 ### Priority Todo
 
-- Make note cards smaller, and have them side by side, since the content inside doesn't justify full width of page.
-- Add Firebase as a data storage for all resources that are added.
+- Add an exit button on the add resource form - incase we want to cancel. Right now we get stuck on that section.
+- Add a delete button where we are able to delete a resource.
+- Add an edit button - where we are able to edit a resource.
 - Sync container with resources already existing in our firebase database.
 
 #### Future Implements
 
-- Add note property "comments", so that user can comment what the resource is good for, and why he or she suggested it
 - Add note property "category", so that later we can have folders and filter the resources posted.

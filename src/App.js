@@ -1,5 +1,6 @@
 import "./App.css";
 import React from "react";
+import { Note } from "./logic/Notes";
 import DisplayData from "./components/DisplayData";
 import AddNewResource from "./components/AddNewResource";
 import { initializeApp } from "firebase/app";
@@ -39,7 +40,9 @@ class App extends React.Component {
     // Retrieve results from your query.
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((resource) => {
-      data.push(resource.data());
+      // Convert back to Note object before we insert into our state.
+      const rawData = resource.data();
+      data.push(Note(rawData.title, rawData.description, rawData.source));
     });
 
     // Update our state
@@ -51,6 +54,7 @@ class App extends React.Component {
   handleAddNote(newNote) {
     try {
       addDoc(collection(getFirestore(), "resources"), {
+        title: newNote.title,
         description: newNote.description,
         source: newNote.source,
       });
@@ -74,7 +78,7 @@ class App extends React.Component {
 function WebsiteTitle() {
   return (
     <div className="App-title">
-      <h1>Documentations & Resources</h1>
+      <h1>Documentation & Resources</h1>
     </div>
   );
 }

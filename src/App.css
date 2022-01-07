@@ -1,13 +1,14 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Courier New", Courier, monospace;
 }
 
 /* Holds all components */
 .App {
-  width: 90vw;
+  width: 95vw;
   min-width: 300px;
-  height: 90vh;
+  height: 95vh;
 
   display: flex;
   flex-direction: column;
@@ -19,21 +20,38 @@
 }
 
 .App-title {
+  color: white;
   align-self: stretch;
   text-align: center;
 
-  border: solid black 2px;
   border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* Add New Resource Section */
 form {
   display: none;
+  box-sizing: border-box;
+
+  text-align: center;
+  color: white;
+
+  width: 400px;
+  max-width: 90vw;
+  padding: 10px;
+
+  position: absolute;
+  top: 20vh;
+  transform: translateX(-50%);
+  overflow: hidden;
+
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
 }
 
 /* DisplayData and Note Properties */
 .DisplayData {
-  height: 80vh;
+  height: 85vh;
   align-self: stretch;
   text-align: center;
 
@@ -45,18 +63,27 @@ form {
   gap: 10px;
   padding: 10px;
 
-  border: solid black 2px;
   border-radius: 10px;
 
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .Note {
-  width: 200px;
-  height: 100px;
+  width: 250px;
+  height: 200px;
 
   padding: 10px;
   box-sizing: border-box;
 
   border: dashed black 2px;
+
+  overflow-y: scroll;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.note-title {
+  font-weight: bolder;
 }
