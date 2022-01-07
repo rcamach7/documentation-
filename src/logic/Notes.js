@@ -3,6 +3,8 @@ const Note = (description, source) => {
     return `Description: ${description}. You can access this resource at ${source}`;
   };
   return {
+    description,
+    source,
     toString,
   };
 };

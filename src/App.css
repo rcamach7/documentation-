@@ -40,3 +40,23 @@
 form {
   display: none;
 }
+
+/* DisplayData and Note Properties */
+
+.DisplayData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px;
+}
+
+.Note {
+  align-self: stretch;
+  padding: 10px;
+
+  box-sizing: border-box;
+
+  border: dashed black 2px;
+}
