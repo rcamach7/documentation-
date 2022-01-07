@@ -2,7 +2,15 @@ import "./App.css";
 import React from "react";
 import DisplayData from "./components/DisplayData";
 import AddNewResource from "./components/AddNewResource";
-import { Note } from "./logic/Notes";
+import { initializeApp } from "firebase/app";
+import { getFirebaseConfig } from "./logic/config";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  getDocs,
+} from "firebase/firestore";
 
 class App extends React.Component {
   constructor(props) {
@@ -11,38 +19,45 @@ class App extends React.Component {
       notes: [],
     };
     this.handleAddNote = this.handleAddNote.bind(this);
+    this.loadDatabase = this.loadDatabase.bind(this);
   }
 
   componentDidMount() {
-    const defaultNotes = [];
-    defaultNotes.push(
-      Note("CSS Cheat Sheet", "https://htmlcheatsheet.com/css/")
-    );
-    defaultNotes.push(
-      Note(
-        "Complete Guide To Flexbox",
-        "https://css-tricks.com/snippets/css/a-guide-to-flexbox/"
-      )
-    );
-    defaultNotes.push(
-      Note(
-        "Webpack - Getting Started",
-        "https://webpack.js.org/guides/asset-management/"
-      )
-    );
+    const firebaseAppConfig = getFirebaseConfig();
+    initializeApp(firebaseAppConfig);
 
+    this.loadDatabase();
+  }
+
+  async loadDatabase() {
+    const data = [];
+
+    // Reference the database that you want to work with.
+    const allResources = collection(getFirestore(), "resources");
+    // Perform a query search against that database.
+    const q = query(allResources);
+    // Retrieve results from your query.
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((resource) => {
+      data.push(resource.data());
+    });
+
+    // Update our state
     this.setState({
-      notes: defaultNotes,
+      notes: data,
     });
   }
 
   handleAddNote(newNote) {
-    const newCollection = this.state.notes;
-    newCollection.push(newNote);
-
-    this.setState({
-      notes: newCollection,
-    });
+    try {
+      addDoc(collection(getFirestore(), "resources"), {
+        description: newNote.description,
+        source: newNote.source,
+      });
+    } catch (error) {
+      console.error("Error writing new message to Firebase Database", error);
+    }
+    this.loadDatabase();
   }
 
   render() {
