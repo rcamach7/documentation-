@@ -25,18 +25,37 @@
   border-radius: 10px;
 }
 
-.DisplayData {
-  height: 50vh;
+/* Add New Resource Section */
+form {
+  display: none;
+}
 
+/* DisplayData and Note Properties */
+.DisplayData {
+  height: 80vh;
   align-self: stretch;
   text-align: center;
 
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
+  flex-wrap: wrap;
+
+  gap: 10px;
+  padding: 10px;
+
   border: solid black 2px;
   border-radius: 10px;
+
+  overflow: scroll;
 }
 
-/* Add New Resource Section */
+.Note {
+  width: 300px;
+  height: 100px;
 
-form {
-  display: none;
+  padding: 10px;
+  box-sizing: border-box;
+
+  border: dashed black 2px;
 }
