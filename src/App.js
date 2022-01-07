@@ -12,6 +12,8 @@ import {
   query,
   getDocs,
 } from "firebase/firestore";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faWindowClose, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 class App extends React.Component {
   constructor(props) {
@@ -82,5 +84,7 @@ function WebsiteTitle() {
     </div>
   );
 }
+
+library.add(faWindowClose, faPlus);
 
 export default App;

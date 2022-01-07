@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Note } from "../logic/Notes";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function AddNewResource(props) {
   const [title, setTitle] = useState("");
@@ -56,21 +57,34 @@ export default function AddNewResource(props) {
     return true;
   };
 
+  const cancelSubmission = (e) => {
+    e.preventDefault();
+    // Re-display our Add New Resource button previously hidden.
+    formRef.current.style.display = "none";
+    toggleRef.current.style.display = "block";
+  };
+
   return (
     <div className="AddNewResource">
-      <button ref={toggleRef} onClick={(e) => handleToggle(e)}>
+      <button className="btn" ref={toggleRef} onClick={(e) => handleToggle(e)}>
         Add New Resource
       </button>
       <form ref={formRef}>
-        <p>Add New Resource</p>
-        <br />
+        <div className="form-title">
+          <button
+            className="form-title-closeBtn"
+            onClick={(e) => cancelSubmission(e)}
+          >
+            <FontAwesomeIcon icon="window-close" size="1x" />
+          </button>
+        </div>
+        {/* BEGIN FORM INPUT */}
         <label htmlFor="title">Title</label>
         <br />
         <input
           type="text"
           id="title"
           onChange={(e) => setTitle(e.target.value)}
-          required
         />
         <br />
 
@@ -81,7 +95,6 @@ export default function AddNewResource(props) {
           id="description"
           onChange={(e) => setDescription(e.target.value)}
           rows={4}
-          required
         />
         <br />
 
@@ -91,15 +104,15 @@ export default function AddNewResource(props) {
           type="text"
           id="source"
           onChange={(e) => setSource(e.target.value)}
-          required
         />
         <br />
         <br />
 
         <input
+          className="btn btn-form"
           id="newResource"
           type="submit"
-          value="Add Resource"
+          value="Submit"
           onClick={handleSubmission}
         />
         <br />
