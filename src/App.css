@@ -28,6 +28,16 @@
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+/* Add new resource which contains the add and form sections */
+.AddNewResource {
+  align-self: stretch;
+  border-top: dashed black 1px;
+
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+}
+
 /* Add New Resource Section */
 form {
   display: none;
@@ -36,7 +46,7 @@ form {
   text-align: center;
   color: white;
 
-  width: 400px;
+  width: 250px;
   max-width: 90vw;
   padding: 10px;
 
@@ -47,6 +57,39 @@ form {
 
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
+}
+
+.btn {
+  background-color: #000000;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  padding: 0 4px 0 4px;
+}
+
+.btn-form {
+  background-color: #ffffff;
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.form-title {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.form-title-closeBtn {
+  color: red;
+  border: none;
+  background: transparent;
 }
 
 /* DisplayData and Note Properties */
@@ -70,7 +113,7 @@ form {
 
 .Note {
   width: 250px;
-  height: 200px;
+  height: 175px;
 
   padding: 10px;
   box-sizing: border-box;
@@ -84,6 +127,18 @@ form {
   justify-content: space-between;
 }
 
+.Note:hover {
+  background-color: rgb(242, 242, 242);
+}
+
 .note-title {
   font-weight: bolder;
+}
+
+.note-link {
+  cursor: pointer;
+
+  border: solid black 1px;
+  text-decoration: none;
+  padding: 2px 4px 2px 4px;
 }
