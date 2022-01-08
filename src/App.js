@@ -20,6 +20,7 @@ import {
   faWindowClose,
   faPlus,
   faTrashAlt,
+  faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 
 class App extends React.Component {
@@ -27,9 +28,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       notes: [],
-      db: {},
     };
     this.handleAddNote = this.handleAddNote.bind(this);
+    this.handleDeleteNote = this.handleDeleteNote.bind(this);
     this.loadDatabase = this.loadDatabase.bind(this);
   }
 
@@ -37,12 +38,25 @@ class App extends React.Component {
     const firebaseAppConfig = getFirebaseConfig();
     initializeApp(firebaseAppConfig);
 
-    // Get our DB
-    const db = getFirestore();
-    this.setState({
-      db: db,
-    });
+    this.loadDatabase();
+  }
 
+  async handleAddNote(newNote) {
+    try {
+      await setDoc(doc(getFirestore(), "resources", newNote.id), {
+        title: newNote.title,
+        description: newNote.description,
+        source: newNote.source,
+        id: newNote.id,
+      });
+    } catch (error) {
+      console.error("Error writing to database", error);
+    }
+    this.loadDatabase();
+  }
+
+  async handleDeleteNote(documentId) {
+    await deleteDoc(doc(getFirestore(), "resources", documentId));
     this.loadDatabase();
   }
 
@@ -63,24 +77,6 @@ class App extends React.Component {
     this.setState({
       notes: data,
     });
-  }
-
-  async handleAddNote(newNote) {
-    try {
-      await setDoc(doc(getFirestore(), "resources", newNote.id), {
-        title: newNote.title,
-        description: newNote.description,
-        source: newNote.source,
-        id: newNote.id,
-      });
-    } catch (error) {
-      console.error("Error writing to database", error);
-    }
-    this.loadDatabase();
-  }
-
-  async handleDeleteNote(documentId) {
-    await deleteDoc(doc(getFirestore(), "resources", documentId));
   }
 
   render() {
@@ -105,5 +101,5 @@ function WebsiteTitle() {
   );
 }
 
-library.add(faWindowClose, faPlus, faTrashAlt);
+library.add(faWindowClose, faPlus, faTrashAlt, faEdit);
 export default App;
