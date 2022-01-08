@@ -1,11 +1,18 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class DisplayData extends React.Component {
   render() {
     return (
       <div className="DisplayData">
         {this.props.notes.map((note, i) => {
-          return <Note note={note} key={i} />;
+          return (
+            <Note
+              note={note}
+              key={i}
+              handleDeleteNote={this.props.handleDeleteNote}
+            />
+          );
         })}
       </div>
     );
@@ -22,6 +29,15 @@ const Note = (props) => {
         <a className="note-link" href={info.source}>
           Source
         </a>
+        <a className="note-link" onClick={() => alert("Not implemented yet")}>
+          Edit
+        </a>
+        <button
+          className="note-deleteNote"
+          onClick={() => props.handleDeleteNote(info)}
+        >
+          <FontAwesomeIcon icon="trash-alt" size="1x" />
+        </button>
       </p>
     </div>
   );

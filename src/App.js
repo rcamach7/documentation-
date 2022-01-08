@@ -13,7 +13,11 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faWindowClose, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faWindowClose,
+  faPlus,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 class App extends React.Component {
   constructor(props) {
@@ -34,9 +38,9 @@ class App extends React.Component {
 
   async loadDatabase() {
     const data = [];
-
     // Reference the database that you want to work with.
     const allResources = collection(getFirestore(), "resources");
+
     // Perform a query search against that database.
     const q = query(allResources);
     // Retrieve results from your query.
@@ -66,11 +70,16 @@ class App extends React.Component {
     this.loadDatabase();
   }
 
+  handleDeleteNote(note) {}
+
   render() {
     return (
       <div className="App">
         <WebsiteTitle />
-        <DisplayData notes={this.state.notes} />
+        <DisplayData
+          notes={this.state.notes}
+          handleDeleteNote={this.handleDeleteNote}
+        />
         <AddNewResource handleAddNote={this.handleAddNote} />
       </div>
     );
@@ -85,6 +94,6 @@ function WebsiteTitle() {
   );
 }
 
-library.add(faWindowClose, faPlus);
+library.add(faWindowClose, faPlus, faTrashAlt);
 
 export default App;

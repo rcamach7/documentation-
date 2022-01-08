@@ -135,10 +135,27 @@ form {
   font-weight: bolder;
 }
 
+/* Container For sub buttons of Note */
+.note-source {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1px;
+}
+
 .note-link {
   cursor: pointer;
 
   border: solid black 1px;
   text-decoration: none;
   padding: 2px 4px 2px 4px;
+}
+
+.note-deleteNote {
+  margin-left: auto;
+  color: black;
+  cursor: pointer;
+  background: transparent;
+  text-decoration: none;
+  border: none;
 }
