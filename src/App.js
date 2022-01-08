@@ -11,6 +11,9 @@ import {
   addDoc,
   query,
   getDocs,
+  deleteDoc,
+  doc,
+  setDoc,
 } from "firebase/firestore";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -24,6 +27,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       notes: [],
+      db: {},
     };
     this.handleAddNote = this.handleAddNote.bind(this);
     this.loadDatabase = this.loadDatabase.bind(this);
@@ -33,22 +37,26 @@ class App extends React.Component {
     const firebaseAppConfig = getFirebaseConfig();
     initializeApp(firebaseAppConfig);
 
+    // Get our DB
+    const db = getFirestore();
+    this.setState({
+      db: db,
+    });
+
     this.loadDatabase();
   }
 
   async loadDatabase() {
     const data = [];
-    // Reference the database that you want to work with.
-    const allResources = collection(getFirestore(), "resources");
-
-    // Perform a query search against that database.
-    const q = query(allResources);
-    // Retrieve results from your query.
-    const querySnapshot = await getDocs(q);
+    // Request Data from our database.
+    const querySnapshot = await getDocs(
+      query(collection(getFirestore(), "resources"))
+    );
     querySnapshot.forEach((resource) => {
-      // Convert back to Note object before we insert into our state.
       const rawData = resource.data();
-      data.push(Note(rawData.title, rawData.description, rawData.source));
+      data.push(
+        Note(rawData.title, rawData.description, rawData.source, rawData.id)
+      );
     });
 
     // Update our state
@@ -57,20 +65,23 @@ class App extends React.Component {
     });
   }
 
-  handleAddNote(newNote) {
+  async handleAddNote(newNote) {
     try {
-      addDoc(collection(getFirestore(), "resources"), {
+      await setDoc(doc(getFirestore(), "resources", newNote.id), {
         title: newNote.title,
         description: newNote.description,
         source: newNote.source,
+        id: newNote.id,
       });
     } catch (error) {
-      console.error("Error writing new message to Firebase Database", error);
+      console.error("Error writing to database", error);
     }
     this.loadDatabase();
   }
 
-  handleDeleteNote(note) {}
+  async handleDeleteNote(documentId) {
+    await deleteDoc(doc(getFirestore(), "resources", documentId));
+  }
 
   render() {
     return (
@@ -95,5 +106,4 @@ function WebsiteTitle() {
 }
 
 library.add(faWindowClose, faPlus, faTrashAlt);
-
 export default App;

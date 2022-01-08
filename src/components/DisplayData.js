@@ -29,12 +29,15 @@ const Note = (props) => {
         <a className="note-link" href={info.source}>
           Source
         </a>
-        <a className="note-link" onClick={() => alert("Not implemented yet")}>
+        <button
+          className="note-link"
+          onClick={() => alert("Not implemented yet")}
+        >
           Edit
-        </a>
+        </button>
         <button
           className="note-deleteNote"
-          onClick={() => props.handleDeleteNote(info)}
+          onClick={() => props.handleDeleteNote(info.id)}
         >
           <FontAwesomeIcon icon="trash-alt" size="1x" />
         </button>
