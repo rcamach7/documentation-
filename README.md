@@ -2,7 +2,7 @@
 
 Allows users to submit links to documentations, tools, articles, other resources, and more that are constantly used to develope websites. The website stores submissions on the cloud, and updates realtime with any resources added.
 
-![Screenshot](demo.png)
+![Screenshot](appDemo.png)
 
 #### Built Using:
 
