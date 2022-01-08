@@ -149,13 +149,22 @@ form {
   border: solid black 1px;
   text-decoration: none;
   padding: 2px 4px 2px 4px;
+  border-radius: 10px;
 }
 
-.note-deleteNote {
-  margin-left: auto;
+.note-link:visited {
+  color: black;
+}
+
+.note-buttons {
   color: black;
   cursor: pointer;
   background: transparent;
   text-decoration: none;
   border: none;
+}
+
+.note-buttons.edit {
+  margin-left: auto;
+  margin-right: 10px;
 }

@@ -11,12 +11,16 @@ import {
   addDoc,
   query,
   getDocs,
+  deleteDoc,
+  doc,
+  setDoc,
 } from "firebase/firestore";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faWindowClose,
   faPlus,
   faTrashAlt,
+  faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 
 class App extends React.Component {
@@ -26,6 +30,7 @@ class App extends React.Component {
       notes: [],
     };
     this.handleAddNote = this.handleAddNote.bind(this);
+    this.handleDeleteNote = this.handleDeleteNote.bind(this);
     this.loadDatabase = this.loadDatabase.bind(this);
   }
 
@@ -36,19 +41,36 @@ class App extends React.Component {
     this.loadDatabase();
   }
 
+  async handleAddNote(newNote) {
+    try {
+      await setDoc(doc(getFirestore(), "resources", newNote.id), {
+        title: newNote.title,
+        description: newNote.description,
+        source: newNote.source,
+        id: newNote.id,
+      });
+    } catch (error) {
+      console.error("Error writing to database", error);
+    }
+    this.loadDatabase();
+  }
+
+  async handleDeleteNote(documentId) {
+    await deleteDoc(doc(getFirestore(), "resources", documentId));
+    this.loadDatabase();
+  }
+
   async loadDatabase() {
     const data = [];
-    // Reference the database that you want to work with.
-    const allResources = collection(getFirestore(), "resources");
-
-    // Perform a query search against that database.
-    const q = query(allResources);
-    // Retrieve results from your query.
-    const querySnapshot = await getDocs(q);
+    // Request Data from our database.
+    const querySnapshot = await getDocs(
+      query(collection(getFirestore(), "resources"))
+    );
     querySnapshot.forEach((resource) => {
-      // Convert back to Note object before we insert into our state.
       const rawData = resource.data();
-      data.push(Note(rawData.title, rawData.description, rawData.source));
+      data.push(
+        Note(rawData.title, rawData.description, rawData.source, rawData.id)
+      );
     });
 
     // Update our state
@@ -56,21 +78,6 @@ class App extends React.Component {
       notes: data,
     });
   }
-
-  handleAddNote(newNote) {
-    try {
-      addDoc(collection(getFirestore(), "resources"), {
-        title: newNote.title,
-        description: newNote.description,
-        source: newNote.source,
-      });
-    } catch (error) {
-      console.error("Error writing new message to Firebase Database", error);
-    }
-    this.loadDatabase();
-  }
-
-  handleDeleteNote(note) {}
 
   render() {
     return (
@@ -94,6 +101,5 @@ function WebsiteTitle() {
   );
 }
 
-library.add(faWindowClose, faPlus, faTrashAlt);
-
+library.add(faWindowClose, faPlus, faTrashAlt, faEdit);
 export default App;
