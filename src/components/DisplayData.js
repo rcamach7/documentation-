@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Note as NewNote } from "../logic/Notes";
 
 export default class DisplayData extends React.Component {
   render() {
@@ -12,6 +13,7 @@ export default class DisplayData extends React.Component {
               note={note}
               key={i}
               handleDeleteNote={this.props.handleDeleteNote}
+              handleEditNote={this.props.handleEditNote}
             />
           );
         })}
@@ -53,19 +55,18 @@ const Note = (props) => {
       {/* Placeholder For Form, will be displayed using absolute, so not relevant to this placement. */}
       <EditForm
         display={displayForm}
-        title={info.title}
-        description={info.description}
-        source={info.source}
+        note={info}
         handleDisableForm={handleDisableForm}
+        handleEditNote={props.handleEditNote}
       />
     </div>
   );
 };
 
 const EditForm = (props) => {
-  const [title, setTitle] = useState(props.title);
-  const [description, setDescription] = useState(props.description);
-  const [source, setSource] = useState(props.source);
+  const [title, setTitle] = useState(props.note.title);
+  const [description, setDescription] = useState(props.note.description);
+  const [source, setSource] = useState(props.note.source);
   const editFormRef = useRef(null);
 
   useEffect(() => {
@@ -79,6 +80,12 @@ const EditForm = (props) => {
   const cancelEdit = (e) => {
     e.preventDefault();
 
+    props.handleDisableForm();
+  };
+
+  const handleSubmitEdit = (e) => {
+    e.preventDefault();
+    props.handleEditNote(NewNote(title, description, source, props.note.id));
     props.handleDisableForm();
   };
 
@@ -131,6 +138,7 @@ const EditForm = (props) => {
           id="newResource"
           type="submit"
           value="Save Changes"
+          onClick={(e) => handleSubmitEdit(e)}
         />
         <br />
       </form>

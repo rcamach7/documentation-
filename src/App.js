@@ -14,6 +14,7 @@ import {
   deleteDoc,
   doc,
   setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -32,6 +33,7 @@ class App extends React.Component {
     this.handleAddNote = this.handleAddNote.bind(this);
     this.handleDeleteNote = this.handleDeleteNote.bind(this);
     this.loadDatabase = this.loadDatabase.bind(this);
+    this.handleEditNote = this.handleEditNote.bind(this);
   }
 
   componentDidMount() {
@@ -79,6 +81,17 @@ class App extends React.Component {
     });
   }
 
+  async handleEditNote(note) {
+    const docReference = doc(getFirestore(), "resources", note.id);
+    await updateDoc(docReference, {
+      title: note.title,
+      description: note.description,
+      source: note.source,
+    });
+    // Reload database to container
+    this.loadDatabase();
+  }
+
   render() {
     return (
       <div className="App">
@@ -86,6 +99,7 @@ class App extends React.Component {
         <DisplayData
           notes={this.state.notes}
           handleDeleteNote={this.handleDeleteNote}
+          handleEditNote={this.handleEditNote}
         />
         <AddNewResource handleAddNote={this.handleAddNote} />
       </div>
