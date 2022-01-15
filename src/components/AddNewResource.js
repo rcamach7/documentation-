@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Note } from "../logic/Notes";
+import { Resource } from "../logic/Resource";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -34,8 +34,8 @@ export default function AddNewResource(props) {
     }
 
     // Construct a new note, then send it to parent:
-    const newNote = Note(title, description, source);
-    props.handleAddNote(newNote);
+    const newResource = Resource(title, description, source);
+    props.handleAddResource(newResource);
 
     // Clear form value for future submissions, along with current state.
     e.target.form.title.value = "";
