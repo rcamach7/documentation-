@@ -2,32 +2,32 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EditForm from "./EditForm";
 
-const Note = (props) => {
+const Resource = (props) => {
   const [displayForm, setDisplayForm] = useState(false);
-  const info = props.note;
+  const resource = props.resource;
 
   const handleDisableForm = () => {
     setDisplayForm(false);
   };
 
   return (
-    <div className="Note">
-      <p className="note-title">{info.title}</p>
-      <p className="note-description">({info.description})</p>
-      <p className="note-source">
-        <a className="note-link" href={info.source}>
+    <div className="Resource">
+      <p className="resource-title">{resource.title}</p>
+      <p className="resource-description">({resource.description})</p>
+      <p className="resource-source">
+        <a className="resource-link" href={resource.source}>
           Source
         </a>
 
         <button
-          className="note-buttons edit"
+          className="resource-buttons edit"
           onClick={() => setDisplayForm(true)}
         >
           <FontAwesomeIcon icon="edit" size="1x" />
         </button>
         <button
-          className="note-buttons delete"
-          onClick={() => props.handleDeleteNote(info.id)}
+          className="resource-buttons delete"
+          onClick={() => props.handleDeleteResource(resource.id)}
         >
           <FontAwesomeIcon icon="trash-alt" size="1x" />
         </button>
@@ -35,12 +35,12 @@ const Note = (props) => {
       {/* Placeholder For Form, will be displayed using absolute, so not relevant to this placement. */}
       <EditForm
         display={displayForm}
-        note={info}
+        resource={resource}
         handleDisableForm={handleDisableForm}
-        handleEditNote={props.handleEditNote}
+        handleEditResource={props.handleEditResource}
       />
     </div>
   );
 };
 
-export default Note;
+export default Resource;

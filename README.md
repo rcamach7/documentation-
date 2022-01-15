@@ -23,8 +23,6 @@ Allows users to submit links to documentations, tools, articles, other resources
 
 #### Pending Implementations (By Priority)
 
-- Add a delete button where we are able to delete a resource.
-- Add an edit button - where we are able to edit a resource.
 - Add multiple folders - that represent different areas of production to filter through resources.
 - Add note property "category", so that later we can have folders and filter the resources posted.
 - User log in implementation. Program would then only allow logged in users to post and edit resources.

@@ -92,8 +92,8 @@ form {
   background: transparent;
 }
 
-/* DisplayData and Note Properties */
-.DisplayData {
+/* Main Container */
+.ResourceContainer {
   height: 85vh;
   align-self: stretch;
   text-align: center;
@@ -111,7 +111,8 @@ form {
   overflow-y: scroll;
 }
 
-.Note {
+/* Individual Resource Styling */
+.Resource {
   width: 250px;
   height: 175px;
 
@@ -127,23 +128,23 @@ form {
   justify-content: space-between;
 }
 
-.Note:hover {
+.Resource:hover {
   background-color: rgb(242, 242, 242);
 }
 
-.note-title {
+.resource-title {
   font-weight: bolder;
 }
 
 /* Container For sub buttons of Note */
-.note-source {
+.resource-source {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1px;
 }
 
-.note-link {
+.resource-link {
   cursor: pointer;
 
   border: solid black 1px;
@@ -152,11 +153,11 @@ form {
   border-radius: 10px;
 }
 
-.note-link:visited {
+.resource-link:visited {
   color: black;
 }
 
-.note-buttons {
+.resource-buttons {
   color: black;
   cursor: pointer;
   background: transparent;
@@ -164,7 +165,7 @@ form {
   border: none;
 }
 
-.note-buttons.edit {
+.resource-buttons.edit {
   margin-left: auto;
   margin-right: 10px;
 }

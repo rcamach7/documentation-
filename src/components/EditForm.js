@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Note as NewNote } from "../logic/Notes";
+import { Resource } from "../logic/Resource";
 
 const EditForm = (props) => {
-  const [title, setTitle] = useState(props.note.title);
-  const [description, setDescription] = useState(props.note.description);
-  const [source, setSource] = useState(props.note.source);
+  const [title, setTitle] = useState(props.resource.title);
+  const [description, setDescription] = useState(props.resource.description);
+  const [source, setSource] = useState(props.resource.source);
   const editFormRef = useRef(null);
 
   useEffect(() => {
@@ -24,7 +24,9 @@ const EditForm = (props) => {
 
   const handleSubmitEdit = (e) => {
     e.preventDefault();
-    props.handleEditNote(NewNote(title, description, source, props.note.id));
+    props.handleEditResource(
+      Resource(title, description, source, props.resource.id)
+    );
     props.handleDisableForm();
   };
 
