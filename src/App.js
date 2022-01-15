@@ -97,7 +97,7 @@ function App() {
 function WebsiteTitle() {
   return (
     <div className="App-title">
-      <h1>Documentation & Resources</h1>
+      <h1>Software Development Resources</h1>
     </div>
   );
 }
