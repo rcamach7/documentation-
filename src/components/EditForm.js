@@ -31,7 +31,7 @@ const EditForm = (props) => {
   };
 
   return (
-    <div className="EditForm">
+    <div className="EditForm resource-editForm">
       <form ref={editFormRef}>
         <div className="form-title">
           <button

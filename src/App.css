@@ -1,7 +1,11 @@
 * {
-  margin: 0;
+  box-sizing: border-box;
+
+  font-family: "Helvetica", Courier, monospace;
+  text-align: center;
+
   padding: 0;
-  font-family: "Courier New", Courier, monospace;
+  margin: 0;
 }
 
 /* Holds all components */
@@ -52,7 +56,7 @@ form {
 
   position: absolute;
   top: 20vh;
-  transform: translateX(-50%);
+  left: 35%;
   overflow: hidden;
 
   background-color: rgba(0, 0, 0, 0.8);
@@ -116,7 +120,7 @@ form {
   width: 250px;
   height: 175px;
 
-  padding: 10px;
+  padding: 5px;
   box-sizing: border-box;
 
   border: dashed black 2px;
@@ -134,6 +138,12 @@ form {
 
 .resource-title {
   font-weight: bolder;
+}
+
+.resource-description {
+  padding-top: 5px;
+  flex: 4;
+  overflow: hidden;
 }
 
 /* Container For sub buttons of Note */
