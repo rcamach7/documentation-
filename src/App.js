@@ -83,13 +83,13 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header handleAddResource={handleAddResource} />
       <ResourceContainer
         resources={resources}
         handleDeleteResource={handleDeleteResource}
         handleEditResource={handleEditResource}
       />
-      <AddNewResource handleAddResource={handleAddResource} />
+      {/* <AddNewResource handleAddResource={handleAddResource} /> */}
     </div>
   );
 }
