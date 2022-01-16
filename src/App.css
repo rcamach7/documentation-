@@ -10,7 +10,7 @@
 
 /* Holds all components */
 .App {
-  width: 95vw;
+  width: 99vw;
   min-width: 300px;
   height: 95vh;
 
@@ -20,10 +20,10 @@
   gap: 10px;
 
   margin: 0 auto;
-  margin-top: 10px;
+  margin-top: 1px;
 }
 
-.App-title {
+.Header {
   color: white;
   align-self: stretch;
   text-align: center;
@@ -117,7 +117,7 @@ form {
 
 /* Individual Resource Styling */
 .Resource {
-  width: 250px;
+  width: 200px;
   height: 175px;
 
   padding: 5px;
