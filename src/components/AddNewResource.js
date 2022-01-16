@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { Resource } from "../logic/Resource";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,22 +6,6 @@ export default function AddNewResource(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [source, setSource] = useState("");
-  const formRef = useRef(null);
-  const toggleRef = useRef(null);
-
-  const handleToggle = (e) => {
-    if (
-      formRef.current.style.display === "" ||
-      formRef.current.style.display === "none"
-    ) {
-      formRef.current.style.display = "block";
-    } else {
-      formRef.current.style.display = "none";
-    }
-
-    // Hide Button while form is being filled out
-    e.target.style.display = "none";
-  };
 
   const handleSubmission = (e) => {
     e.preventDefault();
@@ -45,11 +28,8 @@ export default function AddNewResource(props) {
     setDescription("");
     setSource("");
 
-    // Re-display our Add New Resource button previously hidden.
-    formRef.current.style.display = "none";
-    toggleRef.current.style.display = "block";
+    props.toggleForm();
   };
-
   const isFormValid = (title, description, source) => {
     if (title === "" || description === "" || source === "") {
       return false;
@@ -57,23 +37,13 @@ export default function AddNewResource(props) {
     return true;
   };
 
-  const cancelSubmission = (e) => {
-    e.preventDefault();
-    // Re-display our Add New Resource button previously hidden.
-    formRef.current.style.display = "none";
-    toggleRef.current.style.display = "block";
-  };
-
   return (
     <div className="AddNewResource">
-      <button className="btn" ref={toggleRef} onClick={(e) => handleToggle(e)}>
-        Add New Resource
-      </button>
-      <form ref={formRef}>
+      <form className="addNewResource-form">
         <div className="form-title">
           <button
             className="form-title-closeBtn"
-            onClick={(e) => cancelSubmission(e)}
+            onClick={(e) => props.toggleForm}
           >
             <FontAwesomeIcon icon="window-close" size="1x" />
           </button>

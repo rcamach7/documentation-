@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Resource } from "./logic/Resource";
 import ResourceContainer from "./components/ResourceContainer";
 import AddNewResource from "./components/AddNewResource";
+import Header from "./components/Header";
 import { initializeApp } from "firebase/app";
 import { getFirebaseConfig } from "./logic/config";
 import {
   getFirestore,
   collection,
-  addDoc,
   query,
   getDocs,
   deleteDoc,
@@ -83,21 +83,13 @@ function App() {
 
   return (
     <div className="App">
-      <WebsiteTitle />
+      <Header handleAddResource={handleAddResource} />
       <ResourceContainer
         resources={resources}
         handleDeleteResource={handleDeleteResource}
         handleEditResource={handleEditResource}
       />
-      <AddNewResource handleAddResource={handleAddResource} />
-    </div>
-  );
-}
-
-function WebsiteTitle() {
-  return (
-    <div className="App-title">
-      <h1>Software Development Resources</h1>
+      {/* <AddNewResource handleAddResource={handleAddResource} /> */}
     </div>
   );
 }

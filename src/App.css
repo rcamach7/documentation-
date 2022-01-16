@@ -10,7 +10,7 @@
 
 /* Holds all components */
 .App {
-  width: 95vw;
+  width: 99vw;
   min-width: 300px;
   height: 95vh;
 
@@ -20,10 +20,11 @@
   gap: 10px;
 
   margin: 0 auto;
-  margin-top: 10px;
+  margin-top: 1px;
 }
 
-.App-title {
+/* Header / Nav Container */
+.Header {
   color: white;
   align-self: stretch;
   text-align: center;
@@ -32,32 +33,35 @@
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.Header ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.Header ul li {
+  list-style: none;
+  font-weight: bolder;
+}
+
+.Header ul li:hover {
+  background-color: black;
+  cursor: pointer;
+}
+
 /* Add new resource which contains the add and form sections */
 .AddNewResource {
   align-self: stretch;
-  border-top: dashed black 1px;
 
+  position: absolute;
   display: flex;
   justify-content: center;
   padding-top: 5px;
 }
 
-/* Add New Resource Section */
-form {
-  display: none;
-  box-sizing: border-box;
-
-  text-align: center;
-  color: white;
-
-  width: 250px;
-  max-width: 90vw;
+.addNewResource-form {
   padding: 10px;
-
-  position: absolute;
-  top: 20vh;
-  left: 35%;
-  overflow: hidden;
 
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
@@ -117,8 +121,7 @@ form {
 
 /* Individual Resource Styling */
 .Resource {
-  width: 250px;
-  height: 175px;
+  width: 200px;
 
   padding: 5px;
   box-sizing: border-box;
@@ -127,6 +130,7 @@ form {
 
   overflow-y: scroll;
 
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
